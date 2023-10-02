@@ -12,7 +12,7 @@
 
 | Tasks | Description | Files |
 | ----- | ----- | ----- |
-| <ul><li> - [ ] Task 0 </li></ul> | 0. Redis utils | [utils/redis.js](utils/redis.js) |
+| <ul><li> - [x] Task 0 </li></ul> | 0. Redis utils | [utils/redis.js](utils/redis.js) |
 | <ul><li> - [ ] Task 1 </li></ul> | 1. MongoDB utils | [utils/db.js](utils/db.js) |
 | <ul><li> - [ ] Task 2 </li></ul> | 2. First API | [server.js](server.js), [routes/index.js](routes/index.js), [controllers/AppController.js](controllers/AppController.js) |
 | <ul><li> - [ ] Task 3 </li></ul> | 3. Create a new user | [utils/](utils/), [routes/index.js](routes/index.js), [controllers/UsersController.js](controllers/UsersController.js) |
