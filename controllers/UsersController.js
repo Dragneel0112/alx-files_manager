@@ -31,4 +31,10 @@ export default class UsersController {
     userQueue.add({ userId });
     res.status(201).json({ email, id: userId });
   }
+
+  static async getMe(req, res) {
+    const { user } = req;
+
+    res.status(200).json({ email: user.email, id: user._id.toString() });
+  }
 }
