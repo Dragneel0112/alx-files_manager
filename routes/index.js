@@ -5,6 +5,7 @@ import UsersController from '../controllers/UsersController';
 import AuthController from '../controllers/AuthController';
 import { basicAuthenticate, xTokenAuthenticate } from '../interface/auth';
 import FilesController from '../controllers/FilesController';
+import { APIError, errorResponse } from '../interface/error';
 
 const injectRoutes = (api) => {
   api.get('/status', AppController.getStatus);
@@ -22,6 +23,11 @@ const injectRoutes = (api) => {
   api.put('/files/:id/publish', xTokenAuthenticate, FilesController.putPublish);
   api.put('/files/:id/unpublish', xTokenAuthenticate, FilesController.putUnpublish);
   api.get('/files/:id/data', FilesController.getFile);
+
+  api.all('*', (req, res, next) => {
+    errorResponse(new APIError(404, `Cannot ${req.method} ${req.url}`), req, res, next);
+  });
+  api.use(errorResponse);
 };
 
 export default injectRoutes;
