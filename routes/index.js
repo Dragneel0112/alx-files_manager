@@ -17,6 +17,8 @@ const injectRoutes = (api) => {
   api.get('/users/me', xTokenAuthenticate, UsersController.getMe);
 
   api.post('/files', xTokenAuthenticate, FilesController.postUpload);
+  api.get('/files/:id', xTokenAuthenticate, FilesController.getShow);
+  api.get('/files', xTokenAuthenticate, FilesController.getIndex);
 };
 
 export default injectRoutes;
