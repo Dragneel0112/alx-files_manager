@@ -47,3 +47,32 @@ fileQueue.process(async (job, done) => {
       done();
     });
 });
+
+userQueue.process(async (job, done) => {
+  const userId = job.data.userId || null;
+
+  if (!userId) {
+    throw new Error('Missing userId');
+  }
+  const user = await (await dbClient.usersCollection())
+    .findOne({ _id: new mongoDBCore.BSON.ObjectId(userId) });
+  if (!user) {
+    throw new Error('User not found');
+  }
+  console.log(`Welcome ${user.email}!`);
+  try {
+    const mailSubject = 'Welcome to ALX-Files_Manager';
+    const mailContent = [
+      '<div>',
+      '<h3>Hello {{user.name}},</h3>',
+      'Welcome to Alx File Manager ',
+      'A simple file management API built with Node.js by Ruven Pillay',
+      'Hope it works well for your requirements',
+      '</div>',
+    ].join('');
+    Mailer.sendMail(Mailer.buildMessage(user.email, mailSubject, mailContent));
+    done();
+  } catch (err) {
+    done(err);
+  }
+});
